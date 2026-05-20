@@ -1,4 +1,4 @@
-name: "CD - Segunda Tanda & Publicación en NPM (pnpm)"
+name: "CD - Segunda Tanda & Publicación"
 
 on:
   push:
