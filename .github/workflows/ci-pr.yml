@@ -1,0 +1,34 @@
+name: "CI - Validación de Pull Requests (pnpm)"
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-and-test:
+    name: "Linter & Tests Unitarios"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 11
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - name: Instalar dependencias limpias
+        run: pnpm install --frozen-lockfile 
+
+      - name: Validar Linter y Formato
+        run: pnpm run lint --if-present
+
+      - name: Ejecutar Tests Unitarios
+        run: pnpm test --if-present

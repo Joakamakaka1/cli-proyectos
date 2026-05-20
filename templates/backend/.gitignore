@@ -1,0 +1,79 @@
+# ==========================================
+# Entornos Virtuales y Dependencias (Python/uv)
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+lib/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ==========================================
+# Cachés de Intérprete y Herramientas (Fast)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# ==========================================
+# Artefactos de build Python
+# ==========================================
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+
+# ==========================================
+# Configuración Local y Secretos (CRÍTICO)
+# ==========================================
+.env
+.env.[a-zA-Z]*
+!.env.example
+.secrets/
+*.pem
+*.key
+*.crt
+
+# ==========================================
+# Base de Datos (SQLite Local / Docker volumes)
+# ==========================================
+*.db
+*.sqlite3
+.db_data/
+
+# ==========================================
+# Logs y Procesos
+# ==========================================
+*.log
+logs/
+*.pid
+*.sock
+
+# ==========================================
+# Docker overrides locales
+# ==========================================
+docker-compose.override.yml
+
+# ==========================================
+# Documentación generada
+# ==========================================
+site/
+
+# ==========================================
+# Archivos de Sistema y Editores (IDE Noise)
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.bak
+.DS_Store
+Thumbs.db

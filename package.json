@@ -1,0 +1,32 @@
+{
+  "name": "cli-projects",
+  "version": "1.0.0",
+  "description": "Generador de proyectos FastAPI + Next.js",
+  "bin": {
+    "cli-projects": "src/index.js"
+  },
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "src",
+    "templates"
+  ],
+  "scripts": {
+    "lint": "pnpm biome check src/",
+    "format": "pnpm biome format --write src/",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.5",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "vitest": "^4.1.7"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

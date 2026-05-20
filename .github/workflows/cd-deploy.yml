@@ -1,0 +1,65 @@
+name: "CD - Segunda Tanda & Publicación en NPM (pnpm)"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  smoke-test-and-deploy:
+    name: "Smoke Test & Deploy a NPM"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 11
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      # uv no viene preinstalado en ubuntu-latest — necesario para el smoke test de backend
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Instalar dependencias limpias
+        run: pnpm install --frozen-lockfile
+
+      - name: Enlazar CLI globalmente
+        run: pnpm link --global
+
+      - name: "🧪 Smoke Test Backend (FastAPI)"
+        run: |
+          echo "1️⃣ TEST BACKEND: Creando proyecto FastAPI..."
+          # Usamos el nombre del binario declarado en package.json["bin"]
+          # tras pnpm link --global. pnpm dlx . es incorrecto (busca un paquete
+          # llamado "." en el registry de npm).
+          # El modo no-interactivo lee argumentos posicionales, sin TTY.
+          cli-projects backend mi-test-api --python 3.12 --no-pipelines
+
+          if [ ! -d "mi-test-api/app" ]; then
+            echo "❌ Error: Faltan archivos en el Backend."
+            exit 1
+          fi
+          echo "✅ Test Backend superado."
+
+      - name: "🧪 Smoke Test Frontend (Next.js)"
+        run: |
+          echo "2️⃣ TEST FRONTEND: Creando proyecto Next.js..."
+          cli-projects frontend mi-test-front --no-pipelines
+
+          if [ ! -d "mi-test-front/src" ] && [ ! -d "mi-test-front/app" ]; then
+            echo "❌ Error: Faltan archivos en el Frontend."
+            exit 1
+          fi
+          echo "✅ Test Frontend superado."
+
+      - name: 🚀 Publicar paquete público
+        run: pnpm publish --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
