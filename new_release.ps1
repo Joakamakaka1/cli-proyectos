@@ -50,6 +50,10 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Error al hacer pull de $mainBranch"; exi
 git -C $PSScriptRoot tag -a $tag -m "Release $tag"
 if ($LASTEXITCODE -ne 0) { Write-Error "Error al crear el tag $tag"; exit 1 }
 
+# Publicar tag en remoto
+git -C $PSScriptRoot push origin $tag
+if ($LASTEXITCODE -ne 0) { Write-Error "Error al publicar el tag $tag en origin"; exit 1 }
+
 Write-Host ""
 Write-Host "Tag $tag creado correctamente en $mainBranch." -ForegroundColor Green
-Write-Host "Para publicarlo ejecuta: git push origin $tag"
+Write-Host "Tag $tag publicado correctamente en origin." -ForegroundColor Green
