@@ -36,7 +36,7 @@ jobs:
       - name: "🧪 Smoke Test Backend (FastAPI)"
         run: |
           echo "1️⃣ TEST BACKEND: Creando proyecto FastAPI..."
-          npx --package $(ls *.tgz) cli-projects backend mi-test-api --python 3.12 --no-pipelines
+          npx --yes --package $(ls *.tgz) cli-projects backend mi-test-api --python 3.12 --no-pipelines
 
           if [ ! -d "mi-test-api/app" ]; then
             echo "❌ Error: Faltan archivos en el Backend."
@@ -47,7 +47,7 @@ jobs:
       - name: "🧪 Smoke Test Frontend (Next.js)"
         run: |
           echo "2️⃣ TEST FRONTEND: Creando proyecto Next.js..."
-          npx --package $(ls *.tgz) cli-projects frontend mi-test-front --no-pipelines
+          npx --yes --package $(ls *.tgz) cli-projects frontend mi-test-front --no-pipelines
 
           if [ ! -d "mi-test-front/src" ] && [ ! -d "mi-test-front/app" ]; then
             echo "❌ Error: Faltan archivos en el Frontend."
