@@ -1,6 +1,6 @@
 {
   "name": "@joakamakaka1/cli-projects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generador de proyectos FastAPI + Next.js",
   "bin": {
     "cli-projects": "src/index.js"
