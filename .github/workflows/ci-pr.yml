@@ -2,7 +2,7 @@ name: "CI - Validación de Pull Requests"
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   quality-and-test:
@@ -28,7 +28,7 @@ jobs:
         run: pnpm install --frozen-lockfile 
 
       - name: Validar Linter y Formato
-        run: pnpm run lint --if-present
+        run: pnpm run lint
 
       - name: Ejecutar Tests Unitarios
-        run: pnpm test --if-present
+        run: pnpm test
