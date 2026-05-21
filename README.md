@@ -28,10 +28,10 @@ You don't even need to install it globally. Run it directly using **pnpm** (reco
 
 ```bash
 # Using pnpm
-pnpm dlx cli-projects
+pnpx @joakamakaka1/cli-projects@1.0.0
 
 # Using npm
-npx cli-projects
+npx @joakamakaka1/cli-projects@1.0.0
 
 # Using bun
-bunx cli-projects
+bunx @joakamakaka1/cli-projects@1.0.0
