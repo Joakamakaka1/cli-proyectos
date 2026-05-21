@@ -2,7 +2,7 @@ name: "CI - Validación de Pull Requests"
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   quality-and-test:
